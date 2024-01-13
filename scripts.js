@@ -28,8 +28,11 @@ $(document).ready(function() {
                 const volume = parsedResponse.volume;
                 const surfaceArea = parsedResponse.surfaceArea;
 
+                // Extract filename
+                const filename = stlFile.name;
+
                 // Construct URL for result page with query parameters
-                const url = "result.html?volume=" + volume + "&surfaceArea=" + surfaceArea;
+                const url = "result.html?stl_file=" + filename;
 
                 // Redirect to result page with calculated values
                 window.location = url;
