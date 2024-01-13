@@ -29,7 +29,7 @@ $(document).ready(function() {
                 const surfaceArea = parsedResponse.surfaceArea;
 
                 // Extract filename
-                const filename = stlFile.name;
+                const filename = encodeURIComponent(stlFile.name);
 
                 // Construct URL for result page with query parameters
                 const url = "result.html?stl_file=" + filename;
