@@ -21,7 +21,7 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(response) {
-                resultDiv.html(response);
+                window.location.href = "result.html";
             }
         });
     });
