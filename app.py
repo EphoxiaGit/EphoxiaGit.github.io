@@ -4,7 +4,6 @@ import pymesh
 
 app = Flask(__name__)
 CORS(app)
-app = Flask(__name__)
 
 def read_stl_file(stl_file):
     # Read the STL file
@@ -39,9 +38,10 @@ def upload_file():
                     surfaceArea = pymesh.surface_area(vertices, triangles)
 
                     # Return the calculated size as JSON
-                    response = jsonify({"volume": volume, "surfaceArea": surfaceArea})
+                    result = {"volume": volume, "surfaceArea": surfaceArea}
 
                     # Set CORS headers
+                    response = jsonify(result)
                     response.headers["Access-Control-Allow-Origin"] = "*"
                     response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
                     response.headers["Access-Control-Allow-Headers"] = "Content-Type"
@@ -51,8 +51,10 @@ def upload_file():
 return response
                 else:
                     # Error handling for invalid STL file
-                    response = jsonify({"error": "Invalid STL file format"})
+                    error = {"error": "Invalid STL file format"}
+
                     # Set CORS headers
+                    response = jsonify(error)
                     response.headers["Access-Control-Allow-Origin"] = "*"
                     response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
                     response.headers["Access-Control-Allow-Headers"] = "Content-Type"
@@ -62,7 +64,17 @@ return response
 return response
             else:
                 # Error handling for no file uploaded
-                return jsonify({"error": "No file uploaded"})
+                error = {"error": "No file uploaded"}
+
+                # Set CORS headers
+                response = jsonify(error)
+                response.headers["Access-Control-Allow-Origin"] = "*"
+                response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+                response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+
+
+                
+return response
     else:
         # Return 405 Not Allowed error for invalid HTTP methods
         return jsonify({"error": "Invalid request method"})
