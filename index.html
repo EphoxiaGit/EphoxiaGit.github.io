@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html
+ 
+lang="en">
+
+<head>
+
+    
+<meta
+ 
+charset="UTF-8">
+
+    
+<meta
+ 
+name="viewport"
+ 
+content="width=device-width, initial-scale=1.0">
+
+    
+<title>3D Model Size Estimator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>3D Model Size Estimator</h1>
+
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label for="stl_file">Upload STL File:</label>
+        <input type="file" id="stl_file" name="stl_file">
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="result"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
