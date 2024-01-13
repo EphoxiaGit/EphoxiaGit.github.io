@@ -28,8 +28,11 @@ $(document).ready(function() {
                 const volume = parsedResponse.volume;
                 const surfaceArea = parsedResponse.surfaceArea;
 
+                // Construct URL for result page with query parameters
+                const url = "result.html?volume=" + volume + "&surfaceArea=" + surfaceArea;
+
                 // Redirect to result page with calculated values
-                window.location = "result.html?volume=" + volume + "&surfaceArea=" + surfaceArea;
+                window.location = url;
             }
         });
     });
