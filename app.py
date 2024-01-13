@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 import pymesh
 
+app = Flask(__name__)
+CORS(app)
 app = Flask(__name__)
 
 def read_stl_file(stl_file):
@@ -36,12 +39,30 @@ def upload_file():
                     surfaceArea = pymesh.surface_area(vertices, triangles)
 
                     # Return the calculated size as JSON
-                    return jsonify({"volume": volume, "surfaceArea": surfaceArea})
+                    response = jsonify({"volume": volume, "surfaceArea": surfaceArea})
+
+                    # Set CORS headers
+                    response.headers["Access-Control-Allow-Origin"] = "*"
+                    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+                    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+
+
+                    
+return response
                 else:
                     # Error handling for invalid STL file
-                    return jsonify({"error": "Invalid STL file format"})
+                    response = jsonify({"error": "Invalid STL file format"})
+                    # Set CORS headers
+                    response.headers["Access-Control-Allow-Origin"] = "*"
+                    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+                    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+
+
+                    
+return response
             else:
                 # Error handling for no file uploaded
                 return jsonify({"error": "No file uploaded"})
     else:
+        # Return 405 Not Allowed error for invalid HTTP methods
         return jsonify({"error": "Invalid request method"})
