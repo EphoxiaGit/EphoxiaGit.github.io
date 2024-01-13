@@ -21,7 +21,15 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(response) {
-                window.location.href = "result.html";
+                // Parse JSON response
+                const parsedResponse = JSON.parse(response);
+
+                // Extract volume and surface area values
+                const volume = parsedResponse.volume;
+                const surfaceArea = parsedResponse.surfaceArea;
+
+                // Redirect to result page with calculated values
+                window.location = "result.html?volume=" + volume + "&surfaceArea=" + surfaceArea;
             }
         });
     });
